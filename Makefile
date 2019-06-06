@@ -1,4 +1,4 @@
-.PHONY: requirements run
+.PHONY: requirements run deploy
 
 requirements:
 	pip-compile
@@ -6,3 +6,6 @@ requirements:
 
 run:
 	cd hotasballs; lambda invoke -v
+
+deploy:
+	cd hotasballs; lambda deploy
