@@ -3,7 +3,7 @@ import os
 import requests
 
 DARKSKY_SECRET_KEY = os.environ.get('DARKSKY_SECRET_KEY')
-HOT_THRESHOLD = os.environ.get('HOT_THRESHOLD', 35)
+HOT_THRESHOLD = int(os.environ.get('HOT_THRESHOLD', 35))
 
 def handler(event, context):
     lon = event.get('lon')
