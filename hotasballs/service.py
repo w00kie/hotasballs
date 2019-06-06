@@ -3,6 +3,7 @@ import os
 import requests
 
 DARKSKY_SECRET_KEY = os.environ.get('DARKSKY_SECRET_KEY')
+HOT_THRESHOLD = os.environ.get('HOT_THRESHOLD', 35)
 
 def handler(event, context):
     lon = event.get('lon')
@@ -22,7 +23,7 @@ def handler(event, context):
     apparentTemperatureHigh = round(today['apparentTemperatureHigh'], 1)
     humidity = round(today['humidity'] * 100)
 
-    if apparentTemperatureHigh < 30:
+    if apparentTemperatureHigh < HOT_THRESHOLD:
         message = f"It's not that hot in {city} today, chill out."
     else:
         message = f"Man, it's hot as balls in {city} today! 🔥🎱"
