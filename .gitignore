@@ -105,3 +105,7 @@ venv.bak/
 
 # AWS Lambda
 config.yaml
+event.json
+
+# Editors
+.vscode
