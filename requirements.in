@@ -1,2 +1,4 @@
 -r hotasballs/requirements.txt
 python-lambda
+pylint
+autopep8

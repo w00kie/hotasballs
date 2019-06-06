@@ -26,6 +26,8 @@ memory_size: 128
 environment_variables:
     DARKSKY_SECRET_KEY:
     HOT_THRESHOLD:
+    TWITTER_CONSUMER_KEY:
+    TWITTER_CONSUMER_SECRET:
 
 # If `tags` is uncommented then tags will be set at creation or update
 # time.  During an update all other tags will be removed except the tags

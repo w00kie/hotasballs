@@ -1,14 +1,19 @@
 # -*- coding: utf-8 -*-
 import os
 import requests
+import tweepy
 
 DARKSKY_SECRET_KEY = os.environ.get('DARKSKY_SECRET_KEY')
 HOT_THRESHOLD = int(os.environ.get('HOT_THRESHOLD', 35))
+TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY')
+TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET')
 
 def handler(event, context):
     lon = event.get('lon')
     lat = event.get('lat')
     city = event.get('city')
+    access_token = event.get('access_token')
+    access_token_secret = event.get('access_token_secret')
 
     DARKSKY_URL = f'https://api.darksky.net/forecast/{DARKSKY_SECRET_KEY}/{lon},{lat}'
     payload = {
@@ -31,5 +36,10 @@ def handler(event, context):
             message += f"\n{temperatureHigh}°C (feels like {apparentTemperatureHigh}°C🔥) with {humidity}% humidity💦"
         else:
             message += f"\n{temperatureHigh}°C🔥 with {humidity}% humidity💦"
+
+    auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
+    auth.set_access_token(access_token, access_token_secret)
+    api = tweepy.API(auth)
+    api.update_status(message)
 
     return message

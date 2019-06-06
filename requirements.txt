@@ -4,6 +4,8 @@
 #
 #    pip-compile
 #
+astroid==2.2.5            # via pylint
+autopep8==1.4.4
 boto3==1.9.162            # via python-lambda
 botocore==1.12.162        # via boto3, s3transfer
 certifi==2019.3.9
@@ -11,11 +13,22 @@ chardet==3.0.4
 click==7.0                # via python-lambda
 docutils==0.14            # via botocore
 idna==2.8
+isort==4.3.20             # via pylint
 jmespath==0.9.4           # via boto3, botocore
+lazy-object-proxy==1.4.1  # via astroid
+mccabe==0.6.1             # via pylint
+oauthlib==3.0.1
+pycodestyle==2.5.0        # via autopep8
+pylint==2.3.1
+pysocks==1.7.0
 python-dateutil==2.8.0    # via botocore
 python-lambda==3.2.6
 pyyaml==5.1               # via python-lambda
+requests-oauthlib==1.2.0
 requests==2.22.0
 s3transfer==0.2.1         # via boto3
-six==1.12.0               # via python-dateutil
+six==1.12.0
+tweepy==3.7.0
+typed-ast==1.4.0          # via astroid
 urllib3==1.25.3
+wrapt==1.11.1             # via astroid
