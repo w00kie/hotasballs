@@ -22,13 +22,13 @@ def handler(event, context):
     apparentTemperatureHigh = today['apparentTemperatureHigh']
     humidity = today['humidity']
 
-    if apparentTemperatureHigh < 35:
+    if apparentTemperatureHigh < 30:
         message = f"It's not that hot in {city} today, chill out."
     else:
-        message = f"Man, it's hot as balls in {city} today!"
+        message = f"Man, it's hot as balls in {city} today! 🔥🎱"
         if apparentTemperatureHigh - temperatureHigh > 1:
-            message += f"\n{temperatureHigh:.1f}°C (feels like {apparentTemperatureHigh:.1f}°C) with {humidity * 100:.0f}% humidity"
+            message += f"\n{temperatureHigh:.1f}°C (feels like {apparentTemperatureHigh:.1f}°C🔥) with {humidity * 100:.0f}% humidity💦"
         else:
-            message += f"\n{temperatureHigh:.1f}°C with {humidity * 100:.0f}% humidity"
+            message += f"\n{temperatureHigh:.1f}°C🔥 with {humidity * 100:.0f}% humidity💦"
 
     return message
