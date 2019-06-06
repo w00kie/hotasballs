@@ -27,7 +27,7 @@ def handler(event, context):
     else:
         message = f"Man, it's hot as balls in {city} today!"
         if apparentTemperatureHigh - temperatureHigh > 1:
-            message += f"\n{temperatureHigh:.1f}°C ({apparentTemperatureHigh:.1f}°C felt) with {humidity * 100:.0f}% humidity"
+            message += f"\n{temperatureHigh:.1f}°C (feels like {apparentTemperatureHigh:.1f}°C) with {humidity * 100:.0f}% humidity"
         else:
             message += f"\n{temperatureHigh:.1f}°C with {humidity * 100:.0f}% humidity"
 
