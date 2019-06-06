@@ -1,2 +1,2 @@
-requests
+-r hotasballs/requirements.txt
 python-lambda
