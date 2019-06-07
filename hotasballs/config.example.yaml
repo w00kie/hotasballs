@@ -26,6 +26,7 @@ memory_size: 128
 environment_variables:
     DARKSKY_SECRET_KEY:
     HOT_THRESHOLD:
+    COLD_THRESHOLD:
     TWITTER_CONSUMER_KEY:
     TWITTER_CONSUMER_SECRET:
 
