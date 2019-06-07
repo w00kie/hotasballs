@@ -109,3 +109,6 @@ event.json
 
 # Editors
 .vscode
+
+# OS X
+.DS_Store
