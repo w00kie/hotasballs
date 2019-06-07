@@ -15,7 +15,7 @@ def handler(event, context):
     access_token = event.get('access_token')
     access_token_secret = event.get('access_token_secret')
 
-    DARKSKY_URL = f'https://api.darksky.net/forecast/{DARKSKY_SECRET_KEY}/{lon},{lat}'
+    DARKSKY_URL = f'https://api.darksky.net/forecast/{DARKSKY_SECRET_KEY}/{lat},{lon}'
     payload = {
         'units': 'si',
         'exclude': 'hourly',
