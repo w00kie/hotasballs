@@ -4,4 +4,5 @@ pylint
 autopep8
 python-dotenv
 green
+coveralls
 requests-mock

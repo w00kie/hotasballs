@@ -40,6 +40,11 @@ jobs:
             . venv/bin/activate
             coverage report
             coverage html
+      - run:
+          name: Push coverage results to coveralls
+          command: |
+            . venv/bin/activate
+            coveralls
 
       - store_artifacts:
           path: htmlcov
