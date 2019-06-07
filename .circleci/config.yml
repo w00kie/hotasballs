@@ -37,6 +37,7 @@ jobs:
       - run:
           name: Generate code coverage report
           command: |
+            . venv/bin/activate
             coverage report
             coverage html
 
