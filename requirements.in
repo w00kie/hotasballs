@@ -1,4 +1,7 @@
--r hotasballs/requirements.txt
+-r hotasballs/requirements.in
 python-lambda
 pylint
 autopep8
+python-dotenv
+green
+requests-mock

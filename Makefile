@@ -1,4 +1,4 @@
-.PHONY: project-requirements requirements run deploy
+.PHONY: project-requirements requirements run deploy test
 
 project-requirements:
 	cd hotasballs; pip-compile --no-annotate
@@ -9,6 +9,9 @@ requirements: project-requirements
 
 run:
 	cd hotasballs; lambda invoke -v
+
+test:
+	green -vvv
 
 deploy:
 	cd hotasballs; lambda deploy --requirements requirements.txt
