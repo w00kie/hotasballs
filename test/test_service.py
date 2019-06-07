@@ -4,6 +4,7 @@ from pathlib import Path
 from unittest import TestCase, mock
 from dotenv import load_dotenv
 import requests_mock
+import tweepy
 
 load_dotenv()
 
@@ -12,9 +13,20 @@ from hotasballs.hotasballs import service
 
 class HotAsBallsTest(TestCase):
     def setUp(self):
-        self.weather_data = json.load(open(Path(__file__).parent / 'weather_data.json', 'r'))
+        self.weather_data = json.load(
+            open(Path(__file__).parent / 'weather_data.json', 'r'))
         self.lat = 35.640432
         self.lon = 139.728833
+        event_input = {
+            'lat': self.lat,
+            'lon': self.lon,
+            'city': 'Tokyo',
+            'access_token': 'token',
+            'access_token_secret': 'secret',
+        }
+        event_template = json.load(
+            open(Path(__file__).parent / 'weather_data.json', 'r'))
+        self.event = {**event_template, **event_input}
     
     def testTestEnv(self):
         '''Test that we have proper environment variables setup.'''
@@ -29,8 +41,8 @@ class HotAsBallsTest(TestCase):
                 json=self.weather_data
             )
             weather = service.get_weather(self.lat, self.lon)
-            self.assertEqual(weather.temperatureHigh, 23.4)
-            self.assertEqual(weather.apparentTemperatureHigh, 24.0)
+            self.assertEqual(weather.temperatureHigh, 26.4)
+            self.assertEqual(weather.apparentTemperatureHigh, 28.0)
             self.assertEqual(weather.humidity, 85)
     
     def testColdMessage(self):
@@ -76,3 +88,18 @@ class HotAsBallsTest(TestCase):
         self.assertIn('Tokyo', message)
         self.assertIn('hot as balls', message)
         self.assertIn('feels like', message)
+
+    @mock.patch.object(tweepy.API, 'update_status')
+    def testFullHandler(self, mock_update_status):
+        '''Test the full handler including twitter.'''
+        with requests_mock.Mocker() as mock:
+            mock.get(
+                f"https://api.darksky.net/forecast/{os.getenv('DARKSKY_SECRET_KEY')}/{self.lat},{self.lon}?units=si&exclude=hourly",
+                json=self.weather_data
+            )
+            output = service.handler(self.event, None)
+
+            # Check message is as expected
+            self.assertIn('Tokyo', output)
+            # Check that Twitter was called
+            mock_update_status.assert_called_with(output)
