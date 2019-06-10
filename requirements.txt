@@ -6,8 +6,8 @@
 #
 astroid==2.2.5            # via pylint
 autopep8==1.4.4
-boto3==1.9.162            # via python-lambda
-botocore==1.12.162        # via boto3, s3transfer
+boto3==1.9.164            # via python-lambda
+botocore==1.12.164        # via boto3, s3transfer
 certifi==2019.3.9         # via requests
 chardet==3.0.4            # via requests
 click==7.0                # via python-lambda
@@ -30,7 +30,7 @@ pysocks==1.7.0            # via tweepy
 python-dateutil==2.8.0    # via botocore
 python-dotenv==0.10.3
 python-lambda==3.2.6
-pyyaml==5.1               # via python-lambda
+pyyaml==5.1.1             # via python-lambda
 requests-mock==1.6.0
 requests-oauthlib==1.2.0  # via tweepy
 requests==2.22.0
