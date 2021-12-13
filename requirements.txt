@@ -4,40 +4,94 @@
 #
 #    pip-compile
 #
-astroid==2.2.5            # via pylint
-autopep8==1.4.4           # via -r requirements.in
-boto3==1.9.164            # via python-lambda
-botocore==1.12.164        # via boto3, s3transfer
-certifi==2019.3.9         # via requests
-chardet==3.0.4            # via requests
-click==7.0                # via python-lambda
-colorama==0.4.1           # via green
-coverage==4.5.3           # via coveralls, green
-coveralls==1.8.0          # via -r requirements.in
-docopt==0.6.2             # via coveralls
-docutils==0.14            # via botocore
-green==2.16.1             # via -r requirements.in
-idna==2.8                 # via requests
-isort==4.3.20             # via pylint
-jmespath==0.9.4           # via boto3, botocore
-lazy-object-proxy==1.4.1  # via astroid
-lxml==4.6.2               # via green
-mccabe==0.6.1             # via pylint
-oauthlib==3.0.1           # via requests-oauthlib
-pycodestyle==2.5.0        # via autopep8
-pylint==2.3.1             # via -r requirements.in
-pysocks==1.7.0            # via tweepy
-python-dateutil==2.8.0    # via botocore
-python-dotenv==0.10.3     # via -r requirements.in
-python-lambda==3.2.6      # via -r requirements.in
-pyyaml==5.1.1             # via python-lambda
-requests-mock==1.6.0      # via -r requirements.in
-requests-oauthlib==1.2.0  # via tweepy
-requests==2.22.0          # via -r hotasballs/requirements.in, coveralls, requests-mock, requests-oauthlib, tweepy
-s3transfer==0.2.1         # via boto3
-six==1.12.0               # via astroid, python-dateutil, requests-mock, tweepy
-tweepy==3.7.0             # via -r hotasballs/requirements.in
-typed-ast==1.4.0          # via astroid
-unidecode==1.0.23         # via green
-urllib3==1.25.3           # via botocore, requests
-wrapt==1.11.1             # via astroid
+astroid==2.2.5
+    # via pylint
+autopep8==1.4.4
+    # via -r requirements.in
+boto3==1.9.164
+    # via python-lambda
+botocore==1.12.164
+    # via
+    #   boto3
+    #   s3transfer
+certifi==2019.3.9
+    # via requests
+chardet==3.0.4
+    # via requests
+click==7.0
+    # via python-lambda
+colorama==0.4.1
+    # via green
+coverage==4.5.3
+    # via
+    #   coveralls
+    #   green
+coveralls==1.8.0
+    # via -r requirements.in
+docopt==0.6.2
+    # via coveralls
+docutils==0.14
+    # via botocore
+green==2.16.1
+    # via -r requirements.in
+idna==2.8
+    # via requests
+isort==4.3.20
+    # via pylint
+jmespath==0.9.4
+    # via
+    #   boto3
+    #   botocore
+lazy-object-proxy==1.4.1
+    # via astroid
+lxml==4.6.5
+    # via green
+mccabe==0.6.1
+    # via pylint
+oauthlib==3.0.1
+    # via requests-oauthlib
+pycodestyle==2.5.0
+    # via autopep8
+pylint==2.3.1
+    # via -r requirements.in
+pysocks==1.7.0
+    # via tweepy
+python-dateutil==2.8.0
+    # via botocore
+python-dotenv==0.10.3
+    # via -r requirements.in
+python-lambda==3.2.6
+    # via -r requirements.in
+pyyaml==5.1.1
+    # via python-lambda
+requests==2.22.0
+    # via
+    #   -r hotasballs/requirements.in
+    #   coveralls
+    #   requests-mock
+    #   requests-oauthlib
+    #   tweepy
+requests-mock==1.6.0
+    # via -r requirements.in
+requests-oauthlib==1.2.0
+    # via tweepy
+s3transfer==0.2.1
+    # via boto3
+six==1.12.0
+    # via
+    #   astroid
+    #   python-dateutil
+    #   requests-mock
+    #   tweepy
+tweepy==3.7.0
+    # via -r hotasballs/requirements.in
+typed-ast==1.4.0
+    # via astroid
+unidecode==1.0.23
+    # via green
+urllib3==1.25.3
+    # via
+    #   botocore
+    #   requests
+wrapt==1.11.1
+    # via astroid
