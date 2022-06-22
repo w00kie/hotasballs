@@ -1,6 +1,6 @@
 # Hot As Balls
 
-[![CircleCI](https://circleci.com/gh/w00kie/hotasballs.svg?style=svg)](https://circleci.com/gh/w00kie/hotasballs)
+![Action Status](https://github.com/w00kie/hotasballs/actions/workflows/python-app.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/w00kie/hotasballs/badge.svg?branch=master)](https://coveralls.io/github/w00kie/hotasballs?branch=master)
 
 ## What is this?
