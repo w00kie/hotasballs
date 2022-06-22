@@ -62,7 +62,7 @@ python-dotenv==0.10.3
     # via -r requirements.in
 python-lambda==3.2.6
     # via -r requirements.in
-pyyaml==5.1.1
+pyyaml==5.4
     # via python-lambda
 requests==2.22.0
     # via
