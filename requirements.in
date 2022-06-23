@@ -1,5 +1,6 @@
 -r hotasballs/requirements.in
-python-lambda
+pip-tools
+git+https://github.com/Lowess/python-lambda@master#egg=python-lambda
 pylint
 autopep8
 python-dotenv

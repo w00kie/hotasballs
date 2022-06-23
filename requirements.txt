@@ -8,9 +8,9 @@ astroid==2.11.6
     # via pylint
 autopep8==1.6.0
     # via -r requirements.in
-boto3==1.24.14
+boto3==1.24.15
     # via python-lambda
-botocore==1.27.14
+botocore==1.27.15
     # via
     #   boto3
     #   s3transfer
@@ -18,8 +18,10 @@ certifi==2022.6.15
     # via requests
 charset-normalizer==2.0.12
     # via requests
-click==6.6
-    # via python-lambda
+click==7.1.2
+    # via
+    #   pip-tools
+    #   python-lambda
 colorama==0.4.5
     # via green
 coverage==6.4.1
@@ -52,6 +54,10 @@ oauthlib==3.2.0
     # via
     #   requests-oauthlib
     #   tweepy
+pep517==0.12.0
+    # via pip-tools
+pip-tools==6.6.2
+    # via -r requirements.in
 platformdirs==2.5.2
     # via pylint
 pycodestyle==2.8.0
@@ -62,7 +68,7 @@ python-dateutil==2.8.2
     # via botocore
 python-dotenv==0.20.0
     # via -r requirements.in
-python-lambda==11.8.0
+python-lambda @ git+https://github.com/Lowess/python-lambda@master
     # via -r requirements.in
 pyyaml==5.1
     # via python-lambda
@@ -86,7 +92,9 @@ six==1.16.0
 toml==0.10.2
     # via autopep8
 tomli==2.0.1
-    # via pylint
+    # via
+    #   pep517
+    #   pylint
 tomlkit==0.11.0
     # via pylint
 tweepy==4.10.0
@@ -97,8 +105,11 @@ urllib3==1.26.9
     # via
     #   botocore
     #   requests
+wheel==0.37.1
+    # via pip-tools
 wrapt==1.14.1
     # via astroid
 
 # The following packages are considered to be unsafe in a requirements file:
+# pip
 # setuptools
