@@ -18,7 +18,6 @@ project-requirements:
 
 requirements: project-requirements
 	pip-compile
-	pip-sync
 
 check-updates:
 	pip-compile -nU | diff requirements.txt -

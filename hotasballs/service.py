@@ -5,7 +5,7 @@ import random
 import requests
 import tweepy
 
-DARKSKY_SECRET_KEY: str = os.environ.get('DARKSKY_SECRET_KEY')
+WEATHER_SECRET_KEY: str = os.environ.get('WEATHER_SECRET_KEY')
 HOT_THRESHOLD: int = int(os.environ.get('HOT_THRESHOLD', 35))
 COLD_THRESHOLD: int = int(os.environ.get('COLD_THRESHOLD', 28))
 TWITTER_CONSUMER_KEY: str = os.environ.get('TWITTER_CONSUMER_KEY')
@@ -13,28 +13,29 @@ TWITTER_CONSUMER_SECRET: str = os.environ.get('TWITTER_CONSUMER_SECRET')
 
 
 class Weather:
-    '''Get data we're interested in from Darsky forecast json and format it.'''
+    '''Get data we're interested in from weather forecast json and format it.'''
     temperatureHigh: float
     apparentTemperatureHigh: float
     humidity: int
 
     def __init__(self, data: dict) -> None:
-        self.temperatureHigh = round(data['temperatureHigh'], 1)
-        self.apparentTemperatureHigh = round(data['apparentTemperatureHigh'], 1)
-        self.humidity = round(data['humidity'] * 100)
+        self.temperatureHigh = round(data['tempmax'], 1)
+        self.apparentTemperatureHigh = round(data['feelslikemax'], 1)
+        self.humidity = round(data['humidity'])
 
 
-def get_weather(lat: float, lon: float) -> object:
-    '''Call Darksky API and return the weather data we need.'''
-    DARKSKY_URL = f'https://api.darksky.net/forecast/{DARKSKY_SECRET_KEY}/{lat},{lon}'
+def get_weather(lat: float, lon: float, city: str) -> object:
+    '''Call Weather API and return the weather data we need.'''
+    WEATHER_URL = f'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city}'
     payload = {
-        'units': 'si',
-        'exclude': 'hourly',
+        'unitGroup': 'metric',
+        'key': WEATHER_SECRET_KEY,
+        'contentType': 'json',
     }
-    forecast = requests.get(DARKSKY_URL, params=payload).json()
+    forecast = requests.get(WEATHER_URL, params=payload).json()
 
     # Only interested in today's forecast
-    today = forecast['daily']['data'][0]
+    today = forecast['days'][0]
     
     return Weather(today)
 
@@ -80,7 +81,7 @@ def handler(event, context):
     access_token: str = event.get('access_token')
     access_token_secret: str = event.get('access_token_secret')
 
-    weather = get_weather(lat, lon)
+    weather = get_weather(lat, lon, city)
 
     message = generate_message(weather, city)
 

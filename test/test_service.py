@@ -17,39 +17,40 @@ class HotAsBallsTest(TestCase):
             open(Path(__file__).parent / 'weather_data.json', 'r'))
         self.lat = 35.640432
         self.lon = 139.728833
+        self.city = 'Tokyo'
         event_input = {
             'lat': self.lat,
             'lon': self.lon,
-            'city': 'Tokyo',
+            'city': self.city,
             'access_token': 'token',
             'access_token_secret': 'secret',
         }
         event_template = json.load(
-            open(Path(__file__).parent / 'weather_data.json', 'r'))
+            open(Path(__file__).parent / 'cloudwatch_event.json', 'r'))
         self.event = {**event_template, **event_input}
     
     def testTestEnv(self):
         '''Test that we have proper environment variables setup.'''
         self.assertEqual(service.HOT_THRESHOLD, 35)
-        self.assertEqual(service.DARKSKY_SECRET_KEY, 'darkskysecret')
+        self.assertEqual(service.WEATHER_SECRET_KEY, 'secretkey')
 
     def testWeatherGet(self):
-        '''Test that we can grab data from Darksky and format it.'''
+        '''Test that we can grab data from weather API and format it.'''
         with requests_mock.Mocker() as mock:
             mock.get(
-                f"https://api.darksky.net/forecast/{os.getenv('DARKSKY_SECRET_KEY')}/{self.lat},{self.lon}?units=si&exclude=hourly",
+                f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{self.city}?unitGroup=metric&key={os.getenv('WEATHER_SECRET_KEY')}&contentType=json",
                 json=self.weather_data
             )
-            weather = service.get_weather(self.lat, self.lon)
-            self.assertEqual(weather.temperatureHigh, 26.4)
-            self.assertEqual(weather.apparentTemperatureHigh, 28.0)
-            self.assertEqual(weather.humidity, 85)
+            weather = service.get_weather(self.lat, self.lon, self.city)
+            self.assertEqual(weather.temperatureHigh, 28.1)
+            self.assertEqual(weather.apparentTemperatureHigh, 29.0)
+            self.assertEqual(weather.humidity, 78)
     
     def testColdMessage(self):
         '''Test message creation when too cold.'''
         w = service.Weather({
-            'temperatureHigh': 23.4,
-            'apparentTemperatureHigh': 24.0,
+            'tempmax': 23.4,
+            'feelslikemax': 24.0,
             'humidity': 85,
         })
         self.assertEqual(service.generate_message(w, 'Tokyo'), None)
@@ -57,8 +58,8 @@ class HotAsBallsTest(TestCase):
     def testWarmMessage(self):
         '''Test message creation when just warm.'''
         w = service.Weather({
-            'temperatureHigh': 23.4,
-            'apparentTemperatureHigh': 29.3,
+            'tempmax': 23.4,
+            'feelslikemax': 29.3,
             'humidity': 85,
         })
         message = service.generate_message(w, 'Tokyo')
@@ -68,8 +69,8 @@ class HotAsBallsTest(TestCase):
     def testHotMessage(self):
         '''Test message creation when it's hot as balls.'''
         w = service.Weather({
-            'temperatureHigh': 35.8,
-            'apparentTemperatureHigh': 36.3,
+            'tempmax': 35.8,
+            'feelslikemax': 36.3,
             'humidity': 85,
         })
         message = service.generate_message(w, 'Tokyo')
@@ -80,8 +81,8 @@ class HotAsBallsTest(TestCase):
     def testHotFeltMessage(self):
         '''Test message creation when it's hot as balls and apparent temp gap.'''
         w = service.Weather({
-            'temperatureHigh': 29.4,
-            'apparentTemperatureHigh': 36.3,
+            'tempmax': 29.4,
+            'feelslikemax': 36.3,
             'humidity': 85,
         })
         message = service.generate_message(w, 'Tokyo')
@@ -94,7 +95,7 @@ class HotAsBallsTest(TestCase):
         '''Test the full handler including twitter.'''
         with requests_mock.Mocker() as mock:
             mock.get(
-                f"https://api.darksky.net/forecast/{os.getenv('DARKSKY_SECRET_KEY')}/{self.lat},{self.lon}?units=si&exclude=hourly",
+                f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{self.city}?unitGroup=metric&key={os.getenv('WEATHER_SECRET_KEY')}&contentType=json",
                 json=self.weather_data
             )
             output = service.handler(self.event, None)
