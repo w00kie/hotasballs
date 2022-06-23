@@ -2,7 +2,7 @@ name: Deploy to AWS Lambda
 
 on:
   release:
-    types: [released]
+    types: [published]
 
 permissions:
   contents: read

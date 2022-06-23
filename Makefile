@@ -32,6 +32,3 @@ run:
 
 test: clean-pyc
 	green -vvv
-
-deploy:
-	cd hotasballs; lambda deploy --requirements requirements.txt

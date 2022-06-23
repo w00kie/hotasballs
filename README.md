@@ -1,6 +1,6 @@
 # Hot As Balls
 
-![Action Status](https://github.com/w00kie/hotasballs/actions/workflows/python-app.yml/badge.svg)
+![Action Status](https://github.com/w00kie/hotasballs/actions/workflows/test.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/w00kie/hotasballs/badge.svg?branch=master)](https://coveralls.io/github/w00kie/hotasballs?branch=master)
 
 ## What is this?
