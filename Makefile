@@ -31,4 +31,4 @@ run:
 	cd hotasballs; lambda invoke -v
 
 test: clean-pyc
-	green -vvv
+	python -m green -vvv
